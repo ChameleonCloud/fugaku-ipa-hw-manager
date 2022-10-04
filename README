@@ -1,0 +1,9 @@
+# Fugaku IPA Hardware Manager
+
+This Repo defines a hardware manager to workaround limitations of
+the Fugaku nodes installed at TACC.
+
+Reference:
+- https://opendev.org/openstack/ironic-python-agent/src/branch/master/examples
+- https://docs.openstack.org/ironic-python-agent/latest/contributor/hardware_managers.html
+- https://www.fujitsu.com/downloads/SUPER/manual/c120-0091-07en.pdf
