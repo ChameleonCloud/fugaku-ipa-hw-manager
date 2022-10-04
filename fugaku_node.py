@@ -38,11 +38,13 @@ def _detect_hardware():
     }
     LOG.debug(f"system info: {system_info}")
 
-    if system_info in SUPPORTED_SYSTEMS:
-        LOG.info("We're a Fugaku Node!")
-        return True
-    else:
-        return False
+    for system in SUPPORTED_SYSTEMS:
+        if system_info == system:
+            LOG.info("We're a Fugaku Node!")
+            return True
+
+    LOG.debug(f"Not a Fugaku Node")
+    return False
 
 
 class FugakuNodeHardwareManager(hardware.HardwareManager):
