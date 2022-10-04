@@ -12,21 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from ironic_lib import utils
 from ironic_python_agent import hardware
 from oslo_log import log
 
 LOG = log.getLogger()
 
 
+SUPPORTED_SYSTEMS = [
+    {"system_manufacturer": "FUJITSU", "system_product_name": "FX700"},
+]
+
 # All the helper methods should be kept outside of the HardwareManager
 # so they'll never get accidentally called by dispatch_to_managers()
 
 
 def _detect_hardware():
-    """Example method for hardware detection."""
-    # For this example, return true if hardware is detected, false if not
-    LOG.debug("Looking for example device")
-    return True
+    """Detect if system is Fugaku Node."""
+    system_manufacturer = utils.execute("dmidecode -s system-manufacturer")
+    system_product_name = utils.execute("dmidecode -s system-product-name")
+
+    system_info = {
+        "system_manufacturer": system_manufacturer,
+        "system_product_name": system_product_name,
+    }
+    LOG.debug(f"system info: {system_info}")
+
+    if system_info in SUPPORTED_SYSTEMS:
+        return True
+    else:
+        return False
 
 
 class FugakuNodeHardwareManager(hardware.HardwareManager):
