@@ -29,8 +29,8 @@ SUPPORTED_SYSTEMS = [
 
 def _detect_hardware():
     """Detect if system is Fugaku Node."""
-    system_manufacturer = utils.execute("dmidecode", "-s", "system-manufacturer")
-    system_product_name = utils.execute("dmidecode", "-s", "system-product-name")
+    system_manufacturer, _ = utils.execute("dmidecode", "-s", "system-manufacturer")
+    system_product_name, _ = utils.execute("dmidecode", "-s", "system-product-name")
 
     system_info = {
         "system_manufacturer": system_manufacturer.strip(),
